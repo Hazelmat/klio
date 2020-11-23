@@ -1,13 +1,26 @@
 Changelog
 =========
 
+0.2.3 (UNRELEASED)
+------------------
+
+Added
+*****
+
+* Add thread limiting context manager utility (See :doc:`../../../keps/kep-002`) .
+
 0.2.2 (2020-12-11)
 ------------------
+
+Added
+*****
+
+* Added support for writing an avro file via ``KlioWriteToAvro``
+
 
 Fixed
 *****
 
-* Added support for writing an avro file via ``KlioWriteToAvro``
 * Allow for support of empty ``job_config.data`` values for the built-in helper filter transforms.
 
 
