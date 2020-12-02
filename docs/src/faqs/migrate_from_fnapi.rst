@@ -1,5 +1,8 @@
+.. _migrate-from-fnapi:
+
 How Do I Migrate from ``setup.py`` to FnAPI?
 ============================================
+
 
 The FnAPI (pronounced "fun API") is what allows Klio to use custom Docker images
 on Dataflow workers.
@@ -38,12 +41,12 @@ Under ``pipeline_options``:
 
         job_name: my-job
         pipeline_options:
-          # NOTE! setup_file is absent
-          experiments:
-            - beam_fn_api
-          worker_harness_container_image: gcr.io/my-project/my-job-image
-          runner: DataflowRunner
-          # <-- snip -->
+            # NOTE! setup_file is absent
+            experiments:
+                - beam_fn_api
+            worker_harness_container_image: gcr.io/my-project/my-job-image
+            runner: DataflowRunner
+            # <-- snip -->
 
 
 Update: ``Dockerfile``
