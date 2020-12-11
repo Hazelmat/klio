@@ -34,6 +34,9 @@ loggers_to_mute = (
 for logger in loggers_to_mute:
     logging.getLogger(logger).setLevel(logging.ERROR)
 logging.getLogger("klio").setLevel(logging.INFO)
+# The concurrency logs may be different for every machine, so let's
+# just turn them off
+logging.getLogger("klio.concurrency").setLevel(logging.ERROR)
 
 
 def run(input_pcol, config):
