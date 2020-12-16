@@ -52,7 +52,7 @@ class EffectiveJobConfig(object):
         self.config_data = core_utils.get_config_by_path(self.config_path)
 
     def _get_effective_config(self):
-        conf = kconfig.KlioConfig(self.config_data)
+        conf = kconfig.KlioConfig.from_raw_config(self.config_data)
 
         effective_config = conf.as_dict()
         return self._order_config_keys(effective_config)

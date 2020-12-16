@@ -70,7 +70,7 @@ class MockKlioConfig(object):
             config_path=config_override or config_file,
         )
 
-        self.klio_config = kconfig.KlioConfig(config_data)
+        self.klio_config = kconfig.KlioConfig.from_raw_config(config_data)
 
         self.mock_klio_config = self.mocker.patch.object(
             core_utils.config, "KlioConfig"

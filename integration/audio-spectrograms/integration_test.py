@@ -34,7 +34,7 @@ class TestExpectedOutput(unittest.TestCase):
     def _load_klio_config(cls):
         config_file_path = os.path.join(os.path.dirname(__file__), "klio-job.yaml")
         with open(config_file_path) as f:
-            return config.KlioConfig(yaml.safe_load(f))
+            return config.KlioConfig.from_raw_config(yaml.safe_load(f))
 
 
     @classmethod

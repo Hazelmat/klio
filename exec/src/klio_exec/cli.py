@@ -100,7 +100,7 @@ def stop_job(config_file):
     config_file = config_file or "klio-job.yaml"
     config_path = os.path.join(job_dir, config_file)
     config_data = _get_config(config_path)
-    conf_obj = config.KlioConfig(config_data)
+    conf_obj = config.KlioConfig.from_raw_config(config_data)
     # TODO: make this a click option once draining is supported @lynn
     strategy = "cancel"
     stop.stop(conf_obj, strategy)
@@ -116,7 +116,7 @@ def test_job(pytest_args):
 
     config_path = "klio-job.yaml"
     config_data = _get_config(config_path)
-    conf_obj = config.KlioConfig(config_data)
+    conf_obj = config.KlioConfig.from_raw_config(config_data)
 
     # RunConfig ensures config is pickled and sent to worker.  Note this
     # depends on save_main_session being True
@@ -171,7 +171,7 @@ def _run_pipeline(input_file, show_logs, entity_ids, config_file):
 
     config_path = config_file or "klio-job.yaml"
     config_data = _get_config(config_path)
-    klio_config = config.KlioConfig(config_data)
+    klio_config = config.KlioConfig.from_raw_config(config_data)
 
     # safety check, even though it should be invoked by another klioexec
     # command
@@ -219,7 +219,7 @@ def profile_memory(
 
     config_path = config_file or "klio-job.yaml"
     config_data = _get_config(config_path)
-    klio_config = config.KlioConfig(config_data)
+    klio_config = config.KlioConfig.from_raw_config(config_data)
 
     _require_profile_input_data(input_file, entity_ids)
 
@@ -269,7 +269,7 @@ def profile_memory_per_line(
 
     config_path = config_file or "klio-job.yaml"
     config_data = _get_config(config_path)
-    klio_config = config.KlioConfig(config_data)
+    klio_config = config.KlioConfig.from_raw_config(config_data)
 
     _require_profile_input_data(input_file, entity_ids)
 
@@ -313,7 +313,7 @@ def profile_cpu(
 
     config_path = config_file or "klio-job.yaml"
     config_data = _get_config(config_path)
-    klio_config = config.KlioConfig(config_data)
+    klio_config = config.KlioConfig.from_raw_config(config_data)
 
     _require_profile_input_data(input_file, entity_ids)
 
@@ -355,7 +355,7 @@ def profile_wall_time(
 
     config_path = config_file or "klio-job.yaml"
     config_data = _get_config(config_path)
-    klio_config = config.KlioConfig(config_data)
+    klio_config = config.KlioConfig.from_raw_config(config_data)
 
     _require_profile_input_data(input_file, entity_ids)
 
@@ -389,7 +389,7 @@ def audit_job(config_file):
 
     job_dir = os.path.abspath(os.getcwd())
     config_data = _get_config(config_file or "klio-job.yaml")
-    conf_obj = config.KlioConfig(config_data)
+    conf_obj = config.KlioConfig.from_raw_config(config_data)
     audit.audit(job_dir, conf_obj)
 
 

@@ -97,7 +97,7 @@ class KlioConfigPreprocessor(object):
         clone = config_dict.copy()
         for io_type in ["events", "data"]:
             for io_direction in ["inputs", "outputs"]:
-                path = "{}.{}".format(io_type, io_direction)
+                path = "job_config.{}.{}".format(io_type, io_direction)
 
                 glom_assign = glom.Assign(
                     path, glom.Spec((path, cls._transform_io_list))

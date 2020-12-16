@@ -24,25 +24,30 @@ def job_config_dict():
     return {
         "metrics": {"logger": {}},
         "events": {
-            "inputs": [
-                {
+            "inputs": {
+                "pubsub0": {
                     "type": "pubsub",
                     "topic": "test-parent-job-out",
                     "subscription": "test-parent-job-out-sub",
                 },
-            ],
-            "outputs": [{"type": "pubsub", "topic": "test-job-out"}],
+            },
+            "outputs": {
+                "pubsub0": {"type": "pubsub", "topic": "test-job-out"}
+            },
         },
         "data": {
-            "inputs": [
-                {
+            "inputs": {
+                "gcs0": {
                     "type": "GCS",
                     "location": "gs://sigint-output/test-parent-job-out",
                 }
-            ],
-            "outputs": [
-                {"type": "GCS", "location": "gs://sigint-output/test-job-out"}
-            ],
+            },
+            "outputs": {
+                "gcs0": {
+                    "type": "GCS",
+                    "location": "gs://sigint-output/test-job-out",
+                }
+            },
         },
         "more": "config",
         "that": {"the": "user"},

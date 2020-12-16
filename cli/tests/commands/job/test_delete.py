@@ -50,7 +50,7 @@ def config_data():
 
 @pytest.fixture
 def klio_config(config_data):
-    return kconfig.KlioConfig(config_data)
+    return kconfig.KlioConfig.from_raw_config(config_data)
 
 
 @pytest.fixture

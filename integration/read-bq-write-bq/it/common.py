@@ -25,7 +25,7 @@ def get_config():
         with open(config_path) as f:
             cfg_dict = yaml.safe_load(f)
 
-        return config.KlioConfig(cfg_dict)
+        return config.KlioConfig.from_raw_config(cfg_dict)
 
     except IOError as e:
         logging.error(e)

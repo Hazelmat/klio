@@ -1,6 +1,14 @@
 Changelog
 =========
 
+0.2.2 (UNRELEASED)
+------------------
+
+Fixed
+*****
+
+* fix preprocessing of config io fields
+
 0.2.1 (2020-12-03)
 ------------------
 

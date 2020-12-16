@@ -98,7 +98,7 @@ def config():
 
 @pytest.fixture
 def klio_config(config):
-    return kconfig.KlioConfig(config)
+    return kconfig.KlioConfig.from_raw_config(config)
 
 
 # NOTE: Python decorators are evaluated on import, and so importing
@@ -107,7 +107,7 @@ def klio_config(config):
 # in those decorators to get evaluated. Therefore, we must patch this part in
 # order to import it, otherwise it will try to load the non-existant
 # `/usr/src/config/.effective-klio-job.yaml`
-mock_config = kconfig.KlioConfig(_config())
+mock_config = kconfig.KlioConfig.from_raw_config(_config())
 patcher = mock.patch(
     "klio.transforms.core.RunConfig.get", lambda: mock_config,
 )
@@ -124,7 +124,9 @@ def patch_get_config(monkeypatch, config):
 
 @pytest.fixture
 def patch_klio_config(monkeypatch, klio_config):
-    monkeypatch.setattr(cli.config, "KlioConfig", lambda x: klio_config)
+    monkeypatch.setattr(
+        cli.config.KlioConfig, "from_raw_config", lambda x: klio_config
+    )
 
 
 @pytest.fixture
@@ -295,7 +297,7 @@ def test_stop_job(
             yaml.dump(config, f)
 
     result = cli_runner.invoke(cli.stop_job, cli_inputs)
-    assert 0 == result.exit_code
+    core_testing.assert_execution_success(result)
 
     mock_stop.assert_called_once_with(klio_config, "cancel")
     mock_get_config.assert_called_once_with(exp_file)
@@ -731,7 +733,9 @@ def test_audit_job(
     mock_audit = mocker.Mock()
     monkeypatch.setattr(cli.audit, "audit", mock_audit)
     mock_klio_config = mocker.Mock()
-    monkeypatch.setattr(cli.config, "KlioConfig", mock_klio_config)
+    monkeypatch.setattr(
+        cli.config.KlioConfig, "from_raw_config", mock_klio_config
+    )
 
     # mocking out what audit.list_audit_steps calls, rather than the func
     # itself since it is a little difficult to patch directly (it's a

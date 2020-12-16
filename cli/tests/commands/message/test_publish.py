@@ -59,7 +59,7 @@ def klio_job_config():
             },
         },
     }
-    return config.KlioConfig(conf)
+    return config.KlioConfig.from_raw_config(conf)
 
 
 @pytest.fixture
